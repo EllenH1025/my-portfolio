@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rui (Ellen) Huang | Strategic Marketing Portfolio</title>
+    <title>Rui (Ellen) Huang | Strategic Marketing & Data Analyst</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,199 +12,229 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
-    <!-- Chosen Palette: Strategic Sand
-         Primary Background: #F9F7F2 (Warm Off-White)
-         Secondary Background: #EBE5DA (Sand)
-         Text Main: #1F2937 (Charcoal)
-         Text Muted: #4B5563 (Gray)
-         Accent Primary: #1E3A8A (Deep Navy - Professionalism)
-         Accent Secondary: #C2410C (Terracotta - Action/Creative)
+    <!-- Chosen Palette: Executive Slate & Ivory
+         Primary Background: #FAFAFA (Crisp Off-White)
+         Secondary Background: #F1F5F9 (Slate 50)
+         Text Main: #0F172A (Slate 900)
+         Text Muted: #475569 (Slate 600)
+         Accent Primary: #1E3A8A (Deep Navy)
+         Accent Secondary: #3B82F6 (Vibrant Blue)
     -->
 
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F9F7F2;
-            color: #1F2937;
+            background-color: #FAFAFA;
+            color: #0F172A;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         h1, h2, h3, h4, .serif {
             font-family: 'Playfair Display', serif;
         }
+        
+        /* Premium Chart Containers */
         .chart-container {
             position: relative;
             width: 100%;
             max-width: 600px;
-            height: 300px;
+            height: 320px;
             margin-left: auto;
             margin-right: auto;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 380px;
             }
         }
-        /* Custom Scrollbar */
+
+        /* Elegant Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #EBE5DA; 
+            background: #F8FAFC; 
         }
         ::-webkit-scrollbar-thumb {
-            background: #D1D5DB; 
-            border-radius: 4px;
+            background: #CBD5E1; 
+            border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #9CA3AF; 
+            background: #94A3B8; 
         }
-        .nav-link.active {
-            color: #1E3A8A;
-            border-bottom: 2px solid #1E3A8A;
+
+        /* Smooth Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
         }
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism for floating elements */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        /* Custom active state for experience tabs */
+        .exp-btn.active {
+            background-color: #F8FAFC;
+            border-left-color: #1E3A8A;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .exp-btn.active h3 {
+            color: #1E3A8A;
         }
     </style>
 
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="antialiased selection:bg-orange-100 selection:text-orange-900">
+<body class="selection:bg-blue-100 selection:text-blue-900">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-[#F9F7F2]/95 backdrop-blur-sm border-b border-stone-200 shadow-sm transition-all duration-300" id="navbar">
+    <nav class="fixed w-full z-50 glass-panel transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
+            <div class="flex justify-between h-20 items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <span class="text-2xl font-bold text-slate-800 serif tracking-tight">RH.</span>
+                    <span class="text-3xl font-bold text-slate-900 serif tracking-tighter">RH<span class="text-blue-600">.</span></span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <button onclick="scrollToSection('hero')" class="nav-link text-gray-600 hover:text-navy-700 px-3 py-2 text-sm font-medium transition-colors">Home</button>
-                    <button onclick="scrollToSection('skills')" class="nav-link text-gray-600 hover:text-navy-700 px-3 py-2 text-sm font-medium transition-colors">Capabilities</button>
-                    <button onclick="scrollToSection('experience')" class="nav-link text-gray-600 hover:text-navy-700 px-3 py-2 text-sm font-medium transition-colors">Experience</button>
-                    <button onclick="scrollToSection('portfolio')" class="nav-link text-gray-600 hover:text-navy-700 px-3 py-2 text-sm font-medium transition-colors">Case Studies</button>
-                    <button onclick="scrollToSection('contact')" class="bg-slate-800 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-slate-700 transition-colors shadow-lg shadow-slate-200/50">Contact</button>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <button onclick="scrollToSection('hero')" class="text-slate-600 hover:text-slate-900 px-3 py-2 text-sm font-medium tracking-wide transition-colors">Profile</button>
+                    <button onclick="scrollToSection('skills')" class="text-slate-600 hover:text-slate-900 px-3 py-2 text-sm font-medium tracking-wide transition-colors">Capabilities</button>
+                    <button onclick="scrollToSection('experience')" class="text-slate-600 hover:text-slate-900 px-3 py-2 text-sm font-medium tracking-wide transition-colors">Experience</button>
+                    <button onclick="scrollToSection('portfolio')" class="text-slate-600 hover:text-slate-900 px-3 py-2 text-sm font-medium tracking-wide transition-colors">Case Studies</button>
+                    <button onclick="scrollToSection('contact')" class="bg-slate-900 text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-blue-800 transition-all shadow-md hover:shadow-lg">Let's Connect</button>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <button onclick="toggleMobileMenu()" class="text-slate-600 hover:text-slate-900 focus:outline-none">
                         <span class="text-2xl">☰</span>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50">Home</button>
-                <button onclick="scrollToSection('skills'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50">Capabilities</button>
-                <button onclick="scrollToSection('experience'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50">Experience</button>
-                <button onclick="scrollToSection('portfolio'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50">Case Studies</button>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
+            <div class="px-4 pt-2 pb-4 space-y-2">
+                <button onclick="scrollToSection('hero'); toggleMobileMenu()" class="block w-full text-left py-2 text-base font-medium text-slate-600 hover:text-slate-900">Profile</button>
+                <button onclick="scrollToSection('skills'); toggleMobileMenu()" class="block w-full text-left py-2 text-base font-medium text-slate-600 hover:text-slate-900">Capabilities</button>
+                <button onclick="scrollToSection('experience'); toggleMobileMenu()" class="block w-full text-left py-2 text-base font-medium text-slate-600 hover:text-slate-900">Experience</button>
+                <button onclick="scrollToSection('portfolio'); toggleMobileMenu()" class="block w-full text-left py-2 text-base font-medium text-slate-600 hover:text-slate-900">Case Studies</button>
+                <button onclick="scrollToSection('contact'); toggleMobileMenu()" class="block w-full text-left py-2 text-base font-medium text-blue-600">Contact</button>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="fade-in">
-                <div class="inline-block px-4 py-1 mb-6 rounded-full bg-orange-100 text-orange-800 text-xs font-semibold tracking-wide uppercase">
-                    Available Immediately • Global Mobility
+    <section id="hero" class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 max-w-7xl mx-auto min-h-[90vh] flex items-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+            <div class="lg:col-span-7 fade-in-up">
+                <div class="inline-flex items-center px-3 py-1 mb-8 rounded-full border border-slate-200 bg-white text-slate-600 text-xs font-semibold tracking-widest uppercase shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
+                    Available Immediately • Global Work Authorization
                 </div>
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-[1.1] mb-6 serif">
                     Data-Driven <br/>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-indigo-600">Marketing Strategist</span>
+                    <span class="text-blue-800 italic">Marketing Strategist.</span>
                 </h1>
-                <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-lg leading-relaxed">
-                    I bridge the gap between creative storytelling and rigorous analytics. With an M.S. from Columbia and expertise in <strong>SQL, Python, and Brand Strategy</strong>, I turn data into actionable growth.
+                <p class="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl leading-relaxed font-light">
+                    I bridge the gap between creative storytelling and rigorous analytics. With an M.S. from Columbia and deep expertise in <strong>SQL, Python, and Brand Strategy</strong>, I turn complex data into actionable business growth.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <button onclick="scrollToSection('portfolio')" class="px-8 py-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 text-center">
-                        View Analytics Portfolio
+                    <button onclick="scrollToSection('portfolio')" class="px-8 py-4 bg-slate-900 text-white rounded-lg font-medium hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-center tracking-wide">
+                        Explore Analytics Portfolio
                     </button>
-                    <button onclick="scrollToSection('contact')" class="px-8 py-4 bg-white border border-gray-300 text-slate-700 rounded-lg font-medium hover:bg-gray-50 transition-all text-center">
+                    <button onclick="scrollToSection('contact')" class="px-8 py-4 bg-white border border-slate-200 text-slate-700 rounded-lg font-medium hover:bg-slate-50 transition-all text-center tracking-wide hover:border-slate-300">
                         Contact Rui (Ellen)
                     </button>
                 </div>
             </div>
             
             <!-- Hero Stats / Visual -->
-            <div class="relative mt-12 lg:mt-0 fade-in delay-100">
-                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 relative z-10">
-                    <div class="flex justify-between items-end mb-4">
+            <div class="lg:col-span-5 relative mt-12 lg:mt-0 fade-in-up delay-200">
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100 relative z-10">
+                    <div class="flex justify-between items-start mb-6 border-b border-slate-100 pb-4">
                         <div>
-                            <p class="text-sm text-gray-500 uppercase tracking-wider font-semibold">Impact Snapshot</p>
-                            <h3 class="text-2xl font-bold text-slate-800">Performance Metrics</h3>
+                            <p class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-1">Impact Overview</p>
+                            <h3 class="text-xl font-bold text-slate-800 serif">Campaign Optimization</h3>
                         </div>
-                        <span class="text-green-600 font-bold text-sm bg-green-50 px-2 py-1 rounded">Avg. Growth +22%</span>
+                        <span class="text-blue-700 font-bold text-xs bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-full">+22% Efficiency</span>
                     </div>
                     <!-- Chart Container for Hero -->
-                    <div class="chart-container" style="height: 250px;">
+                    <div class="chart-container" style="height: 240px;">
                         <canvas id="heroChart"></canvas>
                     </div>
                 </div>
-                <!-- Decor Elements -->
-                <div class="absolute -top-4 -right-4 w-24 h-24 bg-blue-100 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
-                <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-orange-100 rounded-full mix-blend-multiply filter blur-xl opacity-70"></div>
+                <!-- Subtle Decor Elements -->
+                <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-50 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
+                <div class="absolute -bottom-8 -left-8 w-40 h-40 bg-slate-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
             </div>
         </div>
     </section>
 
     <!-- Skills Analysis Section -->
-    <section id="skills" class="py-20 bg-[#EBE5DA]/30">
+    <section id="skills" class="py-24 bg-slate-50 border-y border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">The Hybrid Advantage</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    Most marketers guess. I calculate. My skillset combines the creative intuition of a Branding Specialist with the technical precision of a Data Analyst.
+            <div class="text-center mb-16 fade-in-up">
+                <p class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">Core Competencies</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-6 serif">The Hybrid Advantage</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                    Moving beyond guesswork. My methodology combines the creative intuition of a Brand Specialist with the technical precision of a Data Analyst to deliver measurable ROI.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <!-- Skills Description -->
-                <div class="space-y-8">
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <div class="flex items-center mb-3">
-                            <span class="text-2xl mr-3">📊</span>
-                            <h3 class="text-xl font-bold text-slate-800">Data Analytics & BI</h3>
+                <div class="space-y-6 fade-in-up delay-100">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-slate-900 serif">Data Analytics & BI</h3>
+                            <span class="text-2xl opacity-80">📊</span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-3">
-                            Turning raw data into decision-making power.
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            Transforming raw product and campaign data into executive-ready dashboards and strategic decisions.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-full">SQL</span>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-full">Python (Pandas, Scikit-learn)</span>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-full">Tableau</span>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-800 text-xs font-semibold rounded-full">K-means Clustering</span>
+                            <span class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold rounded-md">SQL</span>
+                            <span class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold rounded-md">Python (Pandas, Scikit-learn)</span>
+                            <span class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold rounded-md">Tableau</span>
+                            <span class="px-3 py-1.5 bg-slate-100 text-slate-700 border border-slate-200 text-xs font-semibold rounded-md">Predictive Modeling</span>
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 hover:shadow-md transition-shadow">
-                        <div class="flex items-center mb-3">
-                            <span class="text-2xl mr-3">🎨</span>
-                            <h3 class="text-xl font-bold text-slate-800">Brand & Strategy</h3>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-bold text-slate-900 serif">Brand & Strategy</h3>
+                            <span class="text-2xl opacity-80">💡</span>
                         </div>
-                        <p class="text-gray-600 text-sm mb-3">
-                            Crafting narratives that resonate and convert.
+                        <p class="text-slate-600 text-sm mb-6 leading-relaxed">
+                            Crafting multi-channel narratives that resonate, build trust, and drive user acquisition in competitive markets.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-orange-50 text-orange-800 text-xs font-semibold rounded-full">Brand Positioning</span>
-                            <span class="px-3 py-1 bg-orange-50 text-orange-800 text-xs font-semibold rounded-full">SEO/SEM</span>
-                            <span class="px-3 py-1 bg-orange-50 text-orange-800 text-xs font-semibold rounded-full">Lifecycle Marketing</span>
-                            <span class="px-3 py-1 bg-orange-50 text-orange-800 text-xs font-semibold rounded-full">GTM Strategy</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-800 border border-blue-100 text-xs font-semibold rounded-md">Brand Positioning</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-800 border border-blue-100 text-xs font-semibold rounded-md">GTM Strategy</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-800 border border-blue-100 text-xs font-semibold rounded-md">SEO/SEM</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-800 border border-blue-100 text-xs font-semibold rounded-md">Lifecycle Marketing</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Radar Chart -->
-                <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                    <h3 class="text-center font-bold text-slate-700 mb-2 text-sm uppercase tracking-wide">Competency Map</h3>
-                    <div class="chart-container">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 fade-in-up delay-200 h-full flex flex-col justify-center">
+                    <h3 class="text-center font-bold text-slate-400 mb-6 text-xs uppercase tracking-widest">Skill Distribution Matrix</h3>
+                    <div class="chart-container w-full">
                         <canvas id="skillsRadar"></canvas>
                     </div>
                 </div>
@@ -213,41 +243,44 @@
     </section>
 
     <!-- Interactive Experience Timeline -->
-    <section id="experience" class="py-20 bg-white">
+    <section id="experience" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">Professional Journey</h2>
+            <div class="text-center mb-16 fade-in-up">
+                <p class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">Career Trajectory</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 serif">Professional Experience</h2>
+            </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
                 <!-- Timeline List -->
-                <div class="lg:col-span-4 space-y-4">
-                    <button onclick="updateExperience('switch')" id="btn-switch" class="exp-btn w-full text-left p-4 rounded-xl border-l-4 border-blue-800 bg-blue-50 transition-all hover:bg-blue-50 group">
-                        <p class="text-xs font-bold text-gray-500 uppercase mb-1">Apr 2024 - Jan 2026</p>
-                        <h3 class="font-bold text-slate-900 text-lg group-hover:text-blue-800">Switch Energy Alliance</h3>
-                        <p class="text-sm text-gray-600">Marketing Analyst Specialist</p>
+                <div class="lg:col-span-4 space-y-3 fade-in-up delay-100">
+                    <button onclick="updateExperience('switch')" id="btn-switch" class="exp-btn active w-full text-left p-5 rounded-xl border-l-4 border-transparent transition-all duration-200 group">
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Apr 2024 - Jan 2026</p>
+                        <h3 class="font-bold text-slate-800 text-lg group-hover:text-blue-700 transition-colors serif">Switch Energy Alliance</h3>
+                        <p class="text-sm text-slate-500 mt-1">Marketing Analyst Specialist</p>
                     </button>
                     
-                    <button onclick="updateExperience('ofspectrum')" id="btn-ofspectrum" class="exp-btn w-full text-left p-4 rounded-xl border-l-4 border-transparent hover:border-blue-300 transition-all hover:bg-gray-50 group">
-                        <p class="text-xs font-bold text-gray-500 uppercase mb-1">July 2024 - Present</p>
-                        <h3 class="font-bold text-slate-900 text-lg group-hover:text-blue-800">OfSpectrum</h3>
-                        <p class="text-sm text-gray-600">Co-Founder & Head of Marketing</p>
+                    <button onclick="updateExperience('ofspectrum')" id="btn-ofspectrum" class="exp-btn w-full text-left p-5 rounded-xl border-l-4 border-transparent hover:bg-slate-50 transition-all duration-200 group">
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">July 2024 - Present</p>
+                        <h3 class="font-bold text-slate-800 text-lg group-hover:text-blue-700 transition-colors serif">OfSpectrum</h3>
+                        <p class="text-sm text-slate-500 mt-1">Co-Founder & Head of Marketing</p>
                     </button>
 
-                    <button onclick="updateExperience('ibrain')" id="btn-ibrain" class="exp-btn w-full text-left p-4 rounded-xl border-l-4 border-transparent hover:border-blue-300 transition-all hover:bg-gray-50 group">
-                        <p class="text-xs font-bold text-gray-500 uppercase mb-1">May 2023 - Sep 2023</p>
-                        <h3 class="font-bold text-slate-900 text-lg group-hover:text-blue-800">iBrain</h3>
-                        <p class="text-sm text-gray-600">Marketing Associate Intern</p>
+                    <button onclick="updateExperience('ibrain')" id="btn-ibrain" class="exp-btn w-full text-left p-5 rounded-xl border-l-4 border-transparent hover:bg-slate-50 transition-all duration-200 group">
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">May 2023 - Sep 2023</p>
+                        <h3 class="font-bold text-slate-800 text-lg group-hover:text-blue-700 transition-colors serif">iBrain</h3>
+                        <p class="text-sm text-slate-500 mt-1">Marketing Associate Intern</p>
                     </button>
 
-                    <button onclick="updateExperience('ogilvy')" id="btn-ogilvy" class="exp-btn w-full text-left p-4 rounded-xl border-l-4 border-transparent hover:border-blue-300 transition-all hover:bg-gray-50 group">
-                        <p class="text-xs font-bold text-gray-500 uppercase mb-1">Mar 2020 - Oct 2020</p>
-                        <h3 class="font-bold text-slate-900 text-lg group-hover:text-blue-800">Ogilvy</h3>
-                        <p class="text-sm text-gray-600">Public Relations Intern</p>
+                    <button onclick="updateExperience('ogilvy')" id="btn-ogilvy" class="exp-btn w-full text-left p-5 rounded-xl border-l-4 border-transparent hover:bg-slate-50 transition-all duration-200 group">
+                        <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Mar 2020 - Oct 2020</p>
+                        <h3 class="font-bold text-slate-800 text-lg group-hover:text-blue-700 transition-colors serif">Ogilvy</h3>
+                        <p class="text-sm text-slate-500 mt-1">Public Relations Intern</p>
                     </button>
                 </div>
 
                 <!-- Detail View -->
-                <div class="lg:col-span-8">
-                    <div id="experience-content" class="bg-[#F9F7F2] p-8 rounded-2xl border border-stone-200 h-full shadow-sm">
+                <div class="lg:col-span-8 fade-in-up delay-200">
+                    <div id="experience-content" class="bg-white p-10 rounded-2xl border border-slate-200 min-h-[400px] shadow-sm relative overflow-hidden">
                         <!-- Content Injected via JS -->
                     </div>
                 </div>
@@ -256,175 +289,178 @@
     </section>
 
     <!-- Portfolio / Case Studies -->
-    <section id="portfolio" class="py-24 bg-[#1F2937] text-white">
+    <section id="portfolio" class="py-24 bg-slate-900 text-white border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-blue-400 font-bold tracking-wider uppercase text-sm">Case Studies</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2">Data-Backed Results</h2>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Selected projects demonstrating strategic impact through analytics and communications planning.</p>
+            <div class="text-center mb-20 fade-in-up">
+                <span class="text-blue-400 font-bold tracking-widest uppercase text-xs">Analytical Portfolio</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 serif text-white">Data-Backed Results</h2>
+                <p class="text-slate-400 mt-6 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                    Selected projects demonstrating measurable strategic impact through advanced analytics and communication planning.
+                </p>
             </div>
 
             <!-- Case Study 1: OfSpectrum -->
-            <div class="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="mb-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center fade-in-up">
                 <div class="order-2 lg:order-1">
-                    <div class="chart-container bg-white rounded-lg p-4">
+                    <div class="chart-container bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-2xl">
                         <canvas id="ofSpectrumChart"></canvas>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="inline-block px-3 py-1 mb-4 border border-blue-500 rounded-full text-blue-300 text-xs font-bold uppercase">Startup Growth Strategy</div>
-                    <h3 class="text-3xl font-bold mb-4">OfSpectrum: Scaling Trust in AI</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        <strong>Challenge:</strong> Launching a risk-sensitive AI product in a crowded market.<br>
-                        <strong>Strategy:</strong> Designed a trust-first GTM strategy. Led market competitive intelligence and engaged ByteDance for collaboration. Created "The Creator Commerce Convergence" strategy memo.<br>
-                        <strong>Result:</strong> Secured <strong>$90K+ in funding</strong> and grew to <strong>500+ users</strong>.
+                    <div class="inline-block px-3 py-1 mb-6 border border-slate-600 bg-slate-800 rounded-md text-slate-300 text-xs font-bold uppercase tracking-wider">Startup Growth Strategy</div>
+                    <h3 class="text-3xl font-bold mb-6 serif text-white leading-tight">OfSpectrum: Scaling Trust in AI</h3>
+                    <p class="text-slate-300 mb-8 leading-relaxed font-light">
+                        <strong class="text-white font-medium">Challenge:</strong> Launching a risk-sensitive AI product in a crowded, skeptical market.<br><br>
+                        <strong class="text-white font-medium">Strategy:</strong> Designed a trust-first GTM strategy. Led market competitive intelligence and engaged ByteDance for collaboration. Authored "The Creator Commerce Convergence" strategy memo.<br><br>
+                        <strong class="text-white font-medium">Result:</strong> Secured over <strong>$150K in funding</strong> across multiple companies and rapidly scaled the platform to <strong>500+ users</strong>.
                     </p>
-                    <ul class="space-y-2 mb-8">
-                        <li class="flex items-center text-sm text-gray-300">
-                            <span class="text-green-400 mr-2">✓</span> Secured $150K+ total funding (3 companies)
+                    <ul class="space-y-4">
+                        <li class="flex items-start text-sm text-slate-300">
+                            <span class="text-blue-400 mr-3 mt-0.5">✦</span> 
+                            <span>Phoenix News homepage feature and major U.S. university presentations.</span>
                         </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <span class="text-green-400 mr-2">✓</span> Phoenix News homepage feature
-                        </li>
-                        <li class="flex items-center text-sm text-gray-300">
-                            <span class="text-green-400 mr-2">✓</span> 17 Music Studio Contracts signed
+                        <li class="flex items-start text-sm text-slate-300">
+                            <span class="text-blue-400 mr-3 mt-0.5">✦</span> 
+                            <span>17 successful Music Studio Contracts signed.</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Case Study 2: iBrain -->
-            <div class="mb-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="mb-32 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center fade-in-up">
                 <div>
-                    <div class="inline-block px-3 py-1 mb-4 border border-orange-500 rounded-full text-orange-300 text-xs font-bold uppercase">Predictive Analytics</div>
-                    <h3 class="text-3xl font-bold mb-4">iBrain: Reducing Churn with Python</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        <strong>Challenge:</strong> Optimizing the "I Can Do Anything" campaign to retain donors/users.<br>
-                        <strong>Strategy:</strong> Built a Python tracking analytics workflow. Used <strong>Regression + K-means segmentation</strong> to predict engagement with 80% confidence.<br>
-                        <strong>Result:</strong> Informed content updates that <strong>reduced churn by 15%</strong> and boosted effectiveness by 25%.
+                    <div class="inline-block px-3 py-1 mb-6 border border-slate-600 bg-slate-800 rounded-md text-slate-300 text-xs font-bold uppercase tracking-wider">Predictive Analytics</div>
+                    <h3 class="text-3xl font-bold mb-6 serif text-white leading-tight">iBrain: Reducing Churn with Python</h3>
+                    <p class="text-slate-300 mb-8 leading-relaxed font-light">
+                        <strong class="text-white font-medium">Challenge:</strong> Optimizing the "I Can Do Anything" campaign to retain users and donors effectively.<br><br>
+                        <strong class="text-white font-medium">Strategy:</strong> Built a Python tracking analytics workflow. Employed <strong>Regression and K-means segmentation</strong> to predict user engagement with ~80% confidence.<br><br>
+                        <strong class="text-white font-medium">Result:</strong> Actionable content updates derived from the data <strong>reduced churn by 15%</strong> and boosted overall campaign efficiency.
                     </p>
-                    <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <span class="block text-2xl font-bold text-white">22%</span>
-                            <span class="text-xs text-gray-400 uppercase">Efficiency Boost</span>
+                    <div class="grid grid-cols-2 gap-6 mt-8 border-t border-slate-700 pt-8">
+                        <div>
+                            <span class="block text-4xl font-bold text-white mb-1 serif">22%</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Efficiency Boost</span>
                         </div>
-                        <div class="bg-slate-800 p-4 rounded-lg text-center">
-                            <span class="block text-2xl font-bold text-white">15%</span>
-                            <span class="text-xs text-gray-400 uppercase">Churn Reduction</span>
+                        <div>
+                            <span class="block text-4xl font-bold text-white mb-1 serif">15%</span>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Churn Reduction</span>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <div class="chart-container bg-white rounded-lg p-4">
+                    <div class="chart-container bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-2xl">
                         <canvas id="ibrainChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- Case Study 3: Fourplay -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center fade-in-up">
                 <div class="order-2 lg:order-1">
-                    <div class="chart-container bg-white rounded-lg p-4">
+                    <div class="chart-container bg-slate-800 rounded-2xl p-6 border border-slate-700 shadow-2xl flex flex-col justify-center">
                         <canvas id="fourplayChart"></canvas>
                     </div>
                 </div>
                 <div class="order-1 lg:order-2">
-                    <div class="inline-block px-3 py-1 mb-4 border border-purple-500 rounded-full text-purple-300 text-xs font-bold uppercase">Communication Planning</div>
-                    <h3 class="text-3xl font-bold mb-4">Fourplay: Double Dating App Strategy</h3>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        <strong>Context:</strong> Columbia University Capstone Project.<br>
-                        <strong>Insight:</strong> Research identified that potential users were heavily influenced by short-form video content (TikTok/YouTube Shorts) but felt fatigue from traditional dating apps.<br>
-                        <strong>Solution:</strong> Developed a communication plan leveraging YouTube Shorts to drive organic traffic, positioning the app as a "fun double date" to reduce anxiety.
+                    <div class="inline-block px-3 py-1 mb-6 border border-slate-600 bg-slate-800 rounded-md text-slate-300 text-xs font-bold uppercase tracking-wider">Communication Planning</div>
+                    <h3 class="text-3xl font-bold mb-6 serif text-white leading-tight">Fourplay: Double Dating App Strategy</h3>
+                    <p class="text-slate-300 mb-8 leading-relaxed font-light">
+                        <strong class="text-white font-medium">Context:</strong> Columbia University Capstone Project focusing on user acquisition in a saturated market.<br><br>
+                        <strong class="text-white font-medium">Insight:</strong> Target users (specifically males) discovered apps primarily through short-form video but experienced severe fatigue from traditional swiping mechanics.<br><br>
+                        <strong class="text-white font-medium">Solution:</strong> Developed a targeted communication plan leveraging YouTube Shorts, positioning the app as a "fun double date" to reduce anxiety and emphasize social connection over pressure.
                     </p>
-                    <button class="text-white border-b border-white pb-1 hover:text-blue-300 hover:border-blue-300 transition-colors">
-                        Strategy: "Date single friends with your single friends."
-                    </button>
+                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700 text-center italic text-slate-300 text-sm">
+                        "Date single friends with your single friends."
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section class="py-20 bg-[#F9F7F2]">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 serif text-slate-800">Endorsements</h2>
+    <section class="py-24 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-16 serif text-slate-900 fade-in-up">Professional Endorsements</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Ethan -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-blue-800 relative flex flex-col">
-                    <span class="text-6xl text-blue-100 serif leading-none">“</span>
-                    <p class="text-gray-600 relative z-10 mb-6 italic flex-grow">
-                        Ellen demonstrates strong strategic capability: clear thesis, structured competitive map... and a translation from insight to action. She is analytically rigorous, highly self-directed, and excellent at converting strategy into concrete decisions.
-                    </p>
-                    <div class="mt-auto">
-                        <p class="font-bold text-slate-900">Ethan Peng</p>
-                        <p class="text-sm text-gray-500">Co-Founder, OfSpectrum</p>
+                
+                <!-- Carl -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative flex flex-col fade-in-up delay-100 hover:shadow-md transition-shadow">
+                    <div class="mb-6 border-b border-slate-100 pb-4">
+                        <p class="font-bold text-slate-900 serif text-lg">Carl Steffensen</p>
+                        <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">Program Manager, Switch Competition</p>
                     </div>
+                    <p class="text-slate-600 relative z-10 italic flex-grow text-sm leading-relaxed font-serif">
+                        "Ellen expanded her existing network... thinking innovatively and strategically to engage prestigious Chinese universities... She is creative, self-motivated, and driven to contribute constructively... integrating marketing, relationship management, and strategic planning skills."
+                    </p>
+                </div>
+
+                <!-- Ethan -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative flex flex-col fade-in-up delay-200 hover:shadow-md transition-shadow">
+                    <div class="mb-6 border-b border-slate-100 pb-4">
+                        <p class="font-bold text-slate-900 serif text-lg">Ethan Peng</p>
+                        <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">Co-Founder, OfSpectrum</p>
+                    </div>
+                    <p class="text-slate-600 relative z-10 italic flex-grow text-sm leading-relaxed font-serif">
+                        "Ellen demonstrates strong strategic capability: clear thesis, structured competitive map... and a translation from insight to action. She is analytically rigorous, highly self-directed, and excellent at converting strategy into concrete decisions."
+                    </p>
                 </div>
 
                 <!-- Sarah -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-orange-600 relative flex flex-col">
-                    <span class="text-6xl text-orange-100 serif leading-none">“</span>
-                    <p class="text-gray-600 relative z-10 mb-6 italic flex-grow">
-                        She approached tasks with enthusiasm, exploring creative ways to reach new audiences... Her ability to communicate our message effectively was a strong asset. Ellen is dependable and takes initiative.
-                    </p>
-                    <div class="mt-auto">
-                        <p class="font-bold text-slate-900">Sarah Clary</p>
-                        <p class="text-sm text-gray-500">Marketing & Comms Lead, Switch Energy Alliance</p>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative flex flex-col fade-in-up delay-300 hover:shadow-md transition-shadow">
+                    <div class="mb-6 border-b border-slate-100 pb-4">
+                        <p class="font-bold text-slate-900 serif text-lg">Sarah Clary</p>
+                        <p class="text-xs text-slate-500 uppercase tracking-wider mt-1">Marketing & Comms Lead, SEA</p>
                     </div>
-                </div>
-
-                <!-- Carl -->
-                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-green-600 relative flex flex-col">
-                    <span class="text-6xl text-green-100 serif leading-none">“</span>
-                    <p class="text-gray-600 relative z-10 mb-6 italic flex-grow text-sm">
-                        Ellen expanded her existing network... thinking innovatively and strategically to engage prestigious Chinese universities... She is creative, self-motivated, and driven to contribute constructively... integrating marketing, relationship management, and strategic planning skills.
+                    <p class="text-slate-600 relative z-10 italic flex-grow text-sm leading-relaxed font-serif">
+                        "She approached tasks with enthusiasm, exploring creative ways to reach new audiences... Her ability to communicate our message effectively was a strong asset. Ellen is dependable and takes initiative."
                     </p>
-                    <div class="mt-auto">
-                        <p class="font-bold text-slate-900">Carl Steffensen</p>
-                        <p class="text-sm text-gray-500">Program Manager, Switch Competition</p>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact & Visa Section -->
-    <section id="contact" class="py-16 bg-white border-t border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold text-slate-900 mb-6">Let's Connect</h2>
+    <section id="contact" class="py-24 bg-white relative overflow-hidden">
+        <!-- Background accents -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full bg-slate-50 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 fade-in-up">
+            <h2 class="text-4xl font-bold text-slate-900 mb-8 serif">Let's Connect</h2>
             
-            <!-- Global Mobility Block -->
-            <div class="bg-blue-50 border border-blue-100 rounded-lg p-6 mb-10 max-w-2xl mx-auto">
-                <h3 class="text-blue-900 font-bold mb-2 uppercase tracking-wide text-sm flex justify-center items-center">
-                    <span class="mr-2">🌍</span> Global Work Authorization
+            <!-- Global Mobility Block - Styled as a premium executive asset -->
+            <div class="bg-white border border-slate-200 shadow-sm rounded-xl p-8 mb-12 max-w-2xl mx-auto">
+                <h3 class="text-slate-800 font-bold mb-4 uppercase tracking-widest text-xs flex justify-center items-center border-b border-slate-100 pb-3">
+                    <span class="mr-2 text-lg">🌍</span> Global Work Authorization
                 </h3>
-                <p class="text-slate-700 text-sm leading-relaxed">
-                    I hold active work visas for multiple regions, offering flexibility for international teams:
-                    <br>
-                    <strong>Singapore Work Permit (WHP)</strong> • <strong>UK HPI Visa</strong> • <strong>Dutch SVY Visa</strong> • <strong>Japanese J-1F Visa</strong>
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                    Active work visas held for multiple global regions, ensuring seamless and rapid onboarding for international teams:
                 </p>
-                <p class="text-slate-500 text-xs mt-3 italic">
-                    I encourage potential employers to consider these existing authorizations as an asset for rapid onboarding in these locations.
-                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded text-xs font-semibold text-slate-700">Singapore (WHP)</span>
+                    <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded text-xs font-semibold text-slate-700">UK (HPI)</span>
+                    <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded text-xs font-semibold text-slate-700">Netherlands (SVY)</span>
+                    <span class="px-3 py-1 bg-slate-50 border border-slate-200 rounded text-xs font-semibold text-slate-700">Japan (J-1F)</span>
+                </div>
             </div>
 
-            <p class="text-gray-600 mb-8">
-                I am currently available for Social Media, Branding, and Marketing Specialist roles.
+            <p class="text-slate-600 mb-10 text-lg font-light">
+                Currently available for Social Media, Branding, and Marketing Specialist roles.
             </p>
             
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
-                <a href="mailto:rui.huang1025@outlook.com" class="flex items-center px-6 py-3 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5">
-                    <span class="mr-2">✉️</span> rui.huang1025@outlook.com
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="mailto:rui.huang1025@outlook.com" class="flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-slate-900 text-white rounded-lg hover:bg-blue-800 transition-all shadow-md font-medium">
+                    <span class="mr-3">✉️</span> rui.huang1025@outlook.com
                 </a>
-                <a href="https://linkedin.com" target="_blank" class="flex items-center px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-slate-700">
-                    <span class="mr-2">🔗</span> LinkedIn Profile
+                <a href="https://wa.me/16469497050" target="_blank" class="flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-white border border-slate-300 text-slate-800 rounded-lg hover:bg-green-50 hover:border-green-200 hover:text-green-800 transition-all shadow-sm font-medium">
+                    <span class="mr-3">💬</span> +1 646 949 7050 (WhatsApp)
                 </a>
-                <a href="https://wa.me/16469497050" target="_blank" class="flex items-center px-6 py-3 border border-green-500 text-green-700 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                    <span class="mr-2">📞</span> +1 646 949 7050 (WhatsApp)
+                <a href="https://linkedin.com" target="_blank" class="flex items-center justify-center w-full sm:w-auto px-6 py-4 bg-white border border-slate-300 text-slate-800 rounded-lg hover:bg-slate-50 transition-all shadow-sm font-medium">
+                    <span>in</span>
                 </a>
             </div>
-            <p class="mt-4 text-sm text-gray-400">Feel free to add me on WhatsApp anytime.</p>
-            <p class="mt-12 text-xs text-gray-300">© 2026 Rui (Ellen) Huang. Built with data-driven design.</p>
+            
+            <p class="mt-20 text-xs text-slate-400 tracking-wider uppercase">© 2026 Rui (Ellen) Huang. Built with data-driven design.</p>
         </div>
     </section>
 
@@ -436,26 +472,26 @@
                 title: "Marketing Analyst Specialist",
                 company: "Switch Energy Alliance",
                 period: "Apr 2024 - Jan 2026",
-                location: "Austin, TX",
-                description: "Partnered with R&D engineering to design and launch events schema. <strong>Collaborated with the team to build and design the layout and UX/UI of the <a href='https://switchcompetition.org/' target='_blank' class='text-blue-600 hover:underline'>Switch Competition website</a>.</strong> Used SQL/Python to QA data and led outreach to new international markets.",
+                location: "Austin, TX (Contract)",
+                description: "Partnered with R&D engineering to design and launch events schema. <strong>Collaborated with the team to build and design the layout and UX/UI of the <a href='https://switchcompetition.org/' target='_blank' class='text-blue-600 hover:underline font-medium'>Switch Competition website</a>.</strong> Used SQL/Python to QA data and led outreach to new international markets.",
                 highlights: [
                     "Designed event schema for interactive quiz game.",
-                    "Led UX/UI planning for Switch Competition Website.",
-                    "Expanded network to prestigious Chinese universities and sponsors.",
-                    "Used innovative outreach platforms to engage student groups."
+                    "Led UX/UI planning and formatting for the official Switch Competition Website.",
+                    "Expanded network to prestigious Chinese universities, securing key participating teams.",
+                    "Provided critical recommendations for outreach platforms to engage Chinese student groups."
                 ]
             },
             ofspectrum: {
                 title: "Co-Founder & Head of Marketing",
                 company: "OfSpectrum",
                 period: "July 2024 - Present",
-                location: "Early-stage Startup",
-                description: "Leading market & competitive intelligence. Strategy lead for a risk-sensitive AI product focusing on trust and authenticity.",
+                location: "Los Angeles, CA",
+                description: "Leading market & competitive intelligence. Strategy lead for a risk-sensitive AI product focusing on trust, voice authenticity, and ethical use.",
                 highlights: [
-                    "Secured $150,000+ in funding from 3 companies.",
+                    "Secured $150,000+ in funding from 3 companies and a ByteDance collaboration invitation.",
                     "Grew user base to 500+ and signed 17 music studio contracts.",
-                    "Authored 'Creator Commerce Convergence' strategy memo.",
-                    "Achieved Phoenix News homepage coverage."
+                    "Authored 'Creator Commerce Convergence' strategy memo driving B2B messaging.",
+                    "Achieved Phoenix News homepage coverage validating B2C credibility."
                 ]
             },
             ibrain: {
@@ -463,12 +499,12 @@
                 company: "International Institute for the Brain",
                 period: "May 2023 - Sep 2023",
                 location: "New York, NY",
-                description: "Data Analytics & Strategy focus. Built Python tracking workflows to optimize campaign performance.",
+                description: "Data Analytics & Strategy focus. Built Python tracking workflows to optimize campaign performance and donor retention.",
                 highlights: [
-                    "Built Python analytics workflow for 'I Can Do Anything' campaign.",
+                    "Built Python analytics workflow for the 'I Can Do Anything' campaign.",
                     "Reduced churn by 15% via regression + K-means segmentation.",
-                    "Boosted campaign efficiency by 22% using Tableau insights.",
-                    "Analyzed video ad performance trends on mobile."
+                    "Boosted campaign efficiency by 22% using Google Analytics & Tableau insights.",
+                    "Analyzed video ad performance trends on mobile to inform creative."
                 ]
             },
             ogilvy: {
@@ -476,12 +512,12 @@
                 company: "Ogilvy",
                 period: "Mar 2020 - Oct 2020",
                 location: "Shanghai, China",
-                description: "Supported Pfizer’s regional PR strategy by planning and executing branded content across Xiaohongshu, TikTok, and Weibo. Conducted competitive analysis using SEMrush/SimilarWeb.",
+                description: "Supported Pfizer’s regional PR strategy by planning and executing branded content across Xiaohongshu, TikTok, and Weibo. Conducted competitive analysis using SEMrush and SimilarWeb.",
                 highlights: [
                     "Increased campaign reach and engagement by 20% for Pfizer.",
-                    "Improved Pfizer APAC campaign performance by 10% via competitive insights.",
+                    "Improved Pfizer APAC campaign performance by 10% via competitive insights shifting content mix.",
                     "Executed KOL activations lifting reach/engagement by 20%.",
-                    "Supported 'Love is Never Too Late' campaign (+25% reach; 80K+ views)."
+                    "Supported 'Love is Never Too Late' breast-cancer campaign (+25% reach; 80K+ views)."
                 ]
             }
         };
@@ -508,6 +544,18 @@
             menu.classList.toggle('hidden');
         }
 
+        // Add scrolled state to navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.style.background = 'rgba(255, 255, 255, 0.85)';
+            }
+        });
+
         // --- Experience Interaction ---
         function updateExperience(key) {
             const data = experienceData[key];
@@ -515,76 +563,91 @@
             
             // Update Buttons State
             document.querySelectorAll('.exp-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-50', 'border-blue-800');
-                btn.classList.add('border-transparent');
+                btn.classList.remove('active');
             });
             const activeBtn = document.getElementById(`btn-${key}`);
             if (activeBtn) {
-                activeBtn.classList.remove('border-transparent');
-                activeBtn.classList.add('bg-blue-50', 'border-blue-800');
+                activeBtn.classList.add('active');
             }
 
-            // Render Content with Fade Effect
-            contentDiv.innerHTML = `
-                <div class="fade-in">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-2xl font-bold text-slate-800 serif">${data.company}</h3>
-                            <p class="text-lg text-blue-800 font-medium">${data.title}</p>
+            // Render Content with Fade Effect (Resetting animation)
+            contentDiv.innerHTML = '';
+            setTimeout(() => {
+                contentDiv.innerHTML = `
+                    <div class="fade-in-up">
+                        <div class="flex flex-col md:flex-row justify-between items-start mb-6 border-b border-slate-100 pb-6">
+                            <div>
+                                <h3 class="text-3xl font-bold text-slate-900 serif mb-1">${data.company}</h3>
+                                <p class="text-lg text-blue-700 font-medium">${data.title}</p>
+                            </div>
+                            <div class="md:text-right mt-2 md:mt-0">
+                                <p class="text-xs text-slate-500 font-bold uppercase tracking-wider bg-slate-100 px-3 py-1 rounded-md inline-block md:block md:bg-transparent md:px-0 md:py-0">${data.period}</p>
+                                <p class="text-sm text-slate-400 mt-1">${data.location}</p>
+                            </div>
                         </div>
-                        <div class="text-right hidden sm:block">
-                            <p class="text-sm text-gray-500 font-bold uppercase">${data.period}</p>
-                            <p class="text-sm text-gray-400">${data.location}</p>
-                        </div>
+                        <p class="text-slate-600 mb-8 leading-relaxed font-light text-lg">
+                            ${data.description}
+                        </p>
+                        <h4 class="font-bold text-slate-900 mb-4 text-xs uppercase tracking-widest">Strategic Impact & Achievements</h4>
+                        <ul class="space-y-4">
+                            ${data.highlights.map(item => `
+                                <li class="flex items-start">
+                                    <span class="text-blue-500 mr-3 mt-0.5 font-bold">→</span>
+                                    <span class="text-slate-600 font-light">${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
                     </div>
-                    <p class="text-gray-600 mb-6 leading-relaxed border-b border-gray-200 pb-4">
-                        ${data.description}
-                    </p>
-                    <h4 class="font-bold text-slate-700 mb-3 text-sm uppercase tracking-wide">Key Achievements</h4>
-                    <ul class="space-y-3">
-                        ${data.highlights.map(item => `
-                            <li class="flex items-start">
-                                <span class="text-orange-500 mr-3 mt-1">➤</span>
-                                <span class="text-gray-700">${item}</span>
-                            </li>
-                        `).join('')}
-                    </ul>
-                </div>
-            `;
+                `;
+            }, 50);
         }
 
         // --- Charts Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Set default font
+            // Global Chart Defaults for Professional Look
             Chart.defaults.font.family = "'Inter', sans-serif";
-            Chart.defaults.color = '#4B5563';
+            Chart.defaults.color = '#64748b'; // slate-500
+            Chart.defaults.scale.grid.color = 'rgba(226, 232, 240, 0.5)'; // slate-200 with opacity
+
+            const tooltipStyle = {
+                backgroundColor: 'rgba(15, 23, 42, 0.9)', // slate-900
+                titleFont: { size: 13, family: "'Inter', sans-serif", weight: '600' },
+                bodyFont: { size: 13, family: "'Inter', sans-serif" },
+                padding: 12,
+                cornerRadius: 8,
+                displayColors: false
+            };
 
             // 1. Hero Chart: Generic Impact (Bar)
             const ctxHero = document.getElementById('heroChart').getContext('2d');
             new Chart(ctxHero, {
                 type: 'bar',
                 data: {
-                    labels: ['Campaign Reach', 'User Retention', 'Conversion Rate', 'Efficiency'],
+                    labels: ['Reach', 'Retention', 'Conversion', 'Efficiency'],
                     datasets: [{
                         label: 'Optimization Impact',
                         data: [85, 92, 78, 95],
                         backgroundColor: [
-                            'rgba(30, 58, 138, 0.8)', // Navy
-                            'rgba(194, 65, 12, 0.8)', // Terracotta
-                            'rgba(30, 58, 138, 0.6)',
-                            'rgba(194, 65, 12, 0.6)'
+                            '#1E3A8A', // Navy
+                            '#3B82F6', // Blue
+                            '#94A3B8', // Slate
+                            '#1E3A8A'
                         ],
-                        borderRadius: 4
+                        borderRadius: 4,
+                        barThickness: 30
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: tooltipStyle
+                    },
                     scales: {
-                        y: { beginAtZero: true, grid: { display: false }, ticks: { display: false } },
-                        x: { grid: { display: false } }
+                        y: { beginAtZero: true, grid: { display: false }, ticks: { display: false }, border: {display: false} },
+                        x: { grid: { display: false }, border: {display: false}, ticks: { font: { weight: '500' } } }
                     }
                 }
             });
@@ -594,126 +657,164 @@
             new Chart(ctxSkills, {
                 type: 'radar',
                 data: {
-                    labels: ['Python/SQL', 'Brand Strategy', 'Visual Design', 'Market Analysis', 'Campaign Mgmt', 'Statistics'],
+                    labels: ['Data Analytics', 'Brand Strategy', 'Visual UX/UI', 'Market Research', 'Growth Mkting', 'Statistics'],
                     datasets: [{
-                        label: 'Skill Proficiency',
+                        label: 'Proficiency',
                         data: [90, 85, 75, 95, 88, 80],
                         fill: true,
-                        backgroundColor: 'rgba(30, 58, 138, 0.2)',
-                        borderColor: '#1E3A8A',
-                        pointBackgroundColor: '#C2410C',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)', // Light blue fill
+                        borderColor: '#3B82F6', // Blue border
+                        borderWidth: 2,
+                        pointBackgroundColor: '#1E3A8A',
                         pointBorderColor: '#fff',
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#C2410C'
+                        pointHoverBorderColor: '#1E3A8A',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: tooltipStyle
+                    },
                     scales: {
                         r: {
-                            angleLines: { color: '#E5E7EB' },
-                            grid: { color: '#E5E7EB' },
-                            pointLabels: { font: { size: 12, weight: '600' } },
+                            angleLines: { color: 'rgba(226, 232, 240, 0.8)' },
+                            grid: { color: 'rgba(226, 232, 240, 0.8)' },
+                            pointLabels: { font: { size: 11, weight: '600', family: "'Inter', sans-serif" }, color: '#475569' },
                             ticks: { display: false, maxTicksLimit: 5 }
                         }
                     }
                 }
             });
 
-            // 3. OfSpectrum Growth Chart (Line)
+            // 3. OfSpectrum Growth Chart (Line) - Dark Theme
             const ctxOfSpec = document.getElementById('ofSpectrumChart').getContext('2d');
             new Chart(ctxOfSpec, {
                 type: 'line',
                 data: {
-                    labels: ['Launch', 'M1', 'M2', 'M3', 'M4', 'M5', 'Present'],
+                    labels: ['Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6'],
                     datasets: [{
-                        label: 'User Growth',
-                        data: [0, 50, 120, 280, 390, 450, 520],
-                        borderColor: '#3B82F6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        label: 'User Base Growth',
+                        data: [50, 120, 280, 390, 450, 520],
+                        borderColor: '#60A5FA', // Light Blue
+                        backgroundColor: 'rgba(96, 165, 250, 0.1)',
                         fill: true,
-                        tension: 0.4
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointBackgroundColor: '#1E40AF',
+                        pointBorderColor: '#fff',
+                        yAxisID: 'y'
                     }, {
                         label: 'Funding Secured ($K)',
-                        data: [0, 10, 30, 30, 90, 120, 150],
-                        borderColor: '#10B981',
+                        data: [10, 30, 30, 90, 120, 150],
+                        borderColor: '#94A3B8', // Slate
                         borderDash: [5, 5],
                         fill: false,
-                        tension: 0.2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        title: { display: true, text: 'Growth Trajectory & Funding', color: '#fff' },
-                        legend: { labels: { color: '#fff' } }
-                    },
-                    scales: {
-                        y: { ticks: { color: '#9CA3AF' }, grid: { color: '#374151' } },
-                        x: { ticks: { color: '#9CA3AF' }, grid: { color: '#374151' } }
-                    }
-                }
-            });
-
-            // 4. iBrain Analysis Chart (Bar/Line Combo)
-            const ctxBrain = document.getElementById('ibrainChart').getContext('2d');
-            new Chart(ctxBrain, {
-                type: 'bar',
-                data: {
-                    labels: ['Before Analysis', 'After Analysis'],
-                    datasets: [{
-                        label: 'Churn Rate (%)',
-                        data: [28, 13], // 15% reduction roughly
-                        backgroundColor: '#F97316',
-                        borderRadius: 4
-                    }, {
-                        label: 'Content Efficiency Score',
-                        data: [60, 82], // 22% boost roughly
-                        type: 'line',
-                        borderColor: '#1E3A8A',
-                        borderWidth: 3,
+                        tension: 0.2,
+                        borderWidth: 2,
+                        pointRadius: 0,
                         yAxisID: 'y1'
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
                     plugins: {
-                        title: { display: true, text: 'Campaign Optimization Results' }
+                        legend: { labels: { color: '#CBD5E1', boxWidth: 12, font: {family: "'Inter', sans-serif"} } },
+                        tooltip: { ...tooltipStyle, backgroundColor: 'rgba(255, 255, 255, 0.9)', titleColor: '#0F172A', bodyColor: '#0F172A' }
                     },
                     scales: {
-                        y: { beginAtZero: true, title: { display: true, text: 'Churn %' } },
-                        y1: { position: 'right', display: true, grid: { display: false }, title: { display: true, text: 'Efficiency Score' } }
+                        y: { 
+                            type: 'linear', display: true, position: 'left',
+                            ticks: { color: '#94A3B8' }, 
+                            grid: { color: 'rgba(71, 85, 105, 0.2)' },
+                            border: { display: false }
+                        },
+                        y1: { 
+                            type: 'linear', display: true, position: 'right',
+                            ticks: { color: '#94A3B8' }, 
+                            grid: { display: false },
+                            border: { display: false }
+                        },
+                        x: { 
+                            ticks: { color: '#94A3B8' }, 
+                            grid: { display: false },
+                            border: { display: false }
+                        }
                     }
                 }
             });
 
-            // 5. Fourplay Survey Chart (Doughnut)
-            const ctxFour = document.getElementById('fourplayChart').getContext('2d');
-            new Chart(ctxFour, {
-                type: 'doughnut',
+            // 4. iBrain Analysis Chart (Bar) - Dark Theme
+            const ctxBrain = document.getElementById('ibrainChart').getContext('2d');
+            new Chart(ctxBrain, {
+                type: 'bar',
                 data: {
-                    labels: ['YouTube Shorts', 'TikTok', 'Instagram', 'Word of Mouth'],
+                    labels: ['Pre-Analytics', 'Post-Analytics Optimization'],
                     datasets: [{
-                        label: 'User Discovery Channels',
-                        data: [45, 30, 15, 10], // Inferred from "YouTube Shorts" emphasis
-                        backgroundColor: [
-                            '#EF4444', // YT Red
-                            '#000000', // TikTok Black
-                            '#E1306C', // Insta Pink
-                            '#9CA3AF'
-                        ],
-                        borderWidth: 0
+                        label: 'Churn Rate (%)',
+                        data: [28, 13], // 15% reduction
+                        backgroundColor: '#3B82F6', // Blue
+                        borderRadius: 6,
+                        barPercentage: 0.5
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { color: '#fff' } },
-                        title: { display: true, text: 'Target Audience Media Consumption', color: '#fff' }
+                        legend: { display: false },
+                        title: { display: true, text: 'Churn Reduction via Regression Analysis', color: '#F8FAFC', font: {size: 14, weight: '400'} },
+                        tooltip: { ...tooltipStyle, backgroundColor: 'rgba(255, 255, 255, 0.9)', titleColor: '#0F172A', bodyColor: '#0F172A' }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(71, 85, 105, 0.2)' },
+                            border: { display: false }
+                        },
+                        x: { 
+                            ticks: { color: '#F8FAFC', font: {weight: '500'} },
+                            grid: { display: false },
+                            border: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // 5. Fourplay Survey Chart (Doughnut) - Dark Theme
+            const ctxFour = document.getElementById('fourplayChart').getContext('2d');
+            new Chart(ctxFour, {
+                type: 'doughnut',
+                data: {
+                    labels: ['YouTube Shorts', 'TikTok', 'Instagram', 'Other'],
+                    datasets: [{
+                        label: 'User Discovery Preference',
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            '#3B82F6', // Blue
+                            '#1E3A8A', // Navy
+                            '#64748B', // Slate
+                            '#334155'  // Dark Slate
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#CBD5E1', padding: 20, usePointStyle: true, pointStyle: 'circle' } },
+                        title: { display: true, text: 'Discovery Channels (Male Target Demographic)', color: '#F8FAFC', padding: {bottom: 20}, font: {size: 14, weight: '400'} },
+                        tooltip: { ...tooltipStyle, backgroundColor: 'rgba(255, 255, 255, 0.9)', titleColor: '#0F172A', bodyColor: '#0F172A' }
                     }
                 }
             });
